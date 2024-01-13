@@ -1,9 +1,14 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"BilimSearch/models"
+
+	"github.com/jmoiron/sqlx"
+)
 
 type Repository interface {
-	
+	GetUser(username string) (models.User, error)
+	CreateStudent(student models.Student) (int, error)
 }
 
 type repository struct {
