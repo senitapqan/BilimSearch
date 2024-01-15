@@ -17,7 +17,19 @@ func (h *Handler) signIn(c *gin.Context) {
 	if err := c.BindJSON(&request); err != nil {
 		return
 	}
-	c.JSON(http.StatusOK, request)
+
+	token, err := h.services.GenerateToken(request.username, request.password)
+
+	if err != nil {
+		c.JSON(http.StatusBadGateway, map[string]string{
+			"message": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, map[string]string {
+		"token": token,
+	})
 }
 
 func (h *Handler) signUp(c *gin.Context) {

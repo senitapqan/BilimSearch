@@ -8,6 +8,8 @@ import (
 
 type Repository interface {
 	GetUser(username string) (models.User, error)
+	GetRoles(id int) ([]string, error)
+
 	CreateStudent(student models.Student) (int, error)
 }
 

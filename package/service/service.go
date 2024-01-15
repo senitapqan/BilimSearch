@@ -6,6 +6,8 @@ import (
 )
 
 type Service interface {
+	GenerateToken(username, password string) (string, error)
+	
 	CreateStudent(student models.Student) (int, error)
 }
 
