@@ -5,26 +5,16 @@ CREATE TABLE IF NOT EXISTS t_roles (
 
 CREATE TABLE IF NOT EXISTS t_students (
    id serial Primary key, 
-   username varchar(50) unique not null, 
-   password varchar(50) not null, 
-   email varchar(255) not null, 
-   name varchar(50) not null, 
-   surname varchar(50) not null,
-   role_id int not null,
-   FOREIGN KEY (role_id) 
-      REFERENCES t_roles(id)
+   user_id int not null,
+   FOREIGN KEY (user_id) 
+      REFERENCES t_users(id)
 );
 
 CREATE TABLE IF NOT EXISTS t_teachers (
     id serial Primary key, 
-    name varchar(50) not null, 
-    surname varchar(50) not null, 
-    email varchar(255) unique not null, 
-    username varchar(50) unique not null, 
-    password varchar(50) not null,
-    role_id int not null, 
-    FOREIGN KEY (role_id)
-        REFERENCES t_roles(id)
+    user_id int not null,
+    FOREIGN KEY (user_id) 
+      REFERENCES t_users(id)
 );
 
 CREATE TABLE IF NOT EXISTS t_courses (
@@ -106,7 +96,11 @@ CREATE TABLE IF NOT EXISTS t_courses_students(
 
 CREATE TABLE IF NOT EXISTS t_users (
     id serial Primary key,
-    username varchar(50) unique not null, 
+    username varchar(50) unique not null,
+    password varchar(50) not null, 
+    email varchar(255) not null, 
+    name varchar(50) not null, 
+    surname varchar(50) not null,
     password varchar(50) not null
 );
 

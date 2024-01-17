@@ -7,8 +7,9 @@ import (
 
 type Service interface {
 	GenerateToken(username, password string) (string, error)
+	ParseToken(tokem string) (int, []models.RolesHeaders, error)
 	
-	CreateStudent(student models.Student) (int, error)
+	CreateStudent(student models.User) (int, error)
 }
 
 type service struct {

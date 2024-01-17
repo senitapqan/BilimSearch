@@ -4,7 +4,7 @@ import (
 	"BilimSearch/models"
 )
 
-func (s *service) CreateStudent(student models.Student) (int, error) {
+func (s *service) CreateStudent(student models.User) (int, error) {
 	student.Password = s.hashPassword(student.Password)
 	student_id, err := s.repos.CreateStudent(student)
 	if err != nil {

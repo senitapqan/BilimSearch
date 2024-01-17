@@ -8,42 +8,40 @@ import (
 )
 
 type signInRequest struct {
-	username string
-	password string
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }
 
 func (h *Handler) signIn(c *gin.Context) {
 	var request signInRequest
 	if err := c.BindJSON(&request); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())		
 		return
 	}
 
-	token, err := h.services.GenerateToken(request.username, request.password)
+	token, err := h.services.GenerateToken(request.Username, request.Password)
 
 	if err != nil {
-		c.JSON(http.StatusBadGateway, map[string]string{
-			"message": err.Error(),
-		})
+		newErrorResponse(c, http.StatusBadGateway, err.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]string {
+	c.JSON(http.StatusOK, map[string]string{
 		"token": token,
 	})
 }
 
 func (h *Handler) signUp(c *gin.Context) {
-	var request models.Student
+	var request models.User
 	if err := c.BindJSON(&request); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())		
 		return
 	}
 
 	id, err := h.services.CreateStudent(request)
 
 	if err != nil {
-		c.JSON(http.StatusBadGateway, map[string]string{
-			"message": err.Error(),
-		})
+		newErrorResponse(c, http.StatusBadGateway, err.Error())
 		return
 	}
 

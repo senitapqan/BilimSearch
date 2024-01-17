@@ -20,9 +20,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	}
 
 	home := router.Group("/home") 
-	{
-		home.GET("/", h.homePage)
-		
+	{	
+		home.Use(h.userIdentify())
 		home.GET("/grades", h.homeGrades)
 		home.GET("/schedule", h.homeSchedule)
 		home.GET("/attendance", h.homeAttendance)
