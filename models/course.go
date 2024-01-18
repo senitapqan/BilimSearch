@@ -1,30 +1,30 @@
 package models
 
-//models 
+//models
 type Course struct {
-	Id   int
-	Name string
+	Id   int    `json:"id" db:"name"`
+	Name string `json:"name" db:"name"`
 }
 
 type Lesson struct {
-	Id         int
+	Id        int
 	CourseId  int
 	TeacherId int
-	Period     string
+	Period    string
 }
 
 type LessonItem struct {
-	Id        int
+	Id       int
 	LessonId int
-	Date      string
+	Date     string
 }
 
 type CoursesStudents struct {
 	StudentId int
-	CourseId int
+	CourseId  int
 }
 
 type LessonsStudents struct {
 	StudentId int
-	LessonId int
+	LessonId  int
 }

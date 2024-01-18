@@ -9,6 +9,8 @@ type Service interface {
 	GenerateToken(username, password string) (string, error)
 	ParseToken(tokem string) (int, []models.RolesHeaders, error)
 	
+	GetMyCourses(studentId int) ([]models.Course, error)
+
 	CreateStudent(student models.User) (int, error)
 }
 

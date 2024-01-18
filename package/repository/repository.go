@@ -12,6 +12,8 @@ type Repository interface {
 
 	GetId(role string, id int) (int, error)
 
+	GetMyCourses(id int) ([]models.Course, error)
+
 	CreateStudent(student models.User) (int, error)
 }
 

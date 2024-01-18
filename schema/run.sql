@@ -1,1 +1,1 @@
-select r.role_name from t_roles r join t_users_roles c on c.role_id = r.id where c.user_id = 6
+INSERT INTo t_users_roles VALUES (3, 1);
