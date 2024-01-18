@@ -15,21 +15,21 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	auth := router.Group("/auth") 
 	{
-		auth.POST("/sign-in", h.signIn)
-		auth.POST("/sign-up", h.signUp)
+		auth.POST("/sign-in", h.signIn) //done
+		auth.POST("/sign-up", h.signUp)	//done
 	}
 
 	home := router.Group("/home") 
 	{	
 		home.Use(h.userIdentify())
-		home.GET("/grades", h.homeGrades)
-		home.GET("/schedule", h.homeSchedule)
+		home.GET("/grades", h.homeGrades) 
+		home.GET("/schedule", h.homeSchedule)  //proccess
 		home.GET("/attendance", h.homeAttendance)
 		home.GET("/attendance/:id", h.attendanceItem)
 	
 		myCourses := home.Group("/my-courses") 
 		{
-			myCourses.GET("/", h.myCourse)
+			myCourses.GET("/", h.myCourse) //done
 			myCourses.GET("/:id", h.myCourseItem)
 			myCourses.GET("/:id/grades", h.myCourseGrades)
 			myCourses.GET("/:id/task", h.myCourseTasks)

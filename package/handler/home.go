@@ -30,11 +30,32 @@ func (h *Handler) homeGrades(c *gin.Context) {
 }
 
 func (h *Handler) homeSchedule(c *gin.Context) {
+	_, err := getUserId(c)
 
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	roleId, err := getRoleId(c, strudentCtx)
+
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	lessons, err := h.services.GetMyLessons(roleId)
+
+	if err != nil {
+		newErrorResponse(c, http.StatusBadGateway, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, lessons)
 }
 
 func (h *Handler) homeAttendance(c *gin.Context) {
-
+	
 }
 
 func (h *Handler) attendanceItem(c *gin.Context) {
