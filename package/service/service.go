@@ -1,6 +1,7 @@
 package service
 
 import (
+	"BilimSearch/dtos"
 	"BilimSearch/models"
 	"BilimSearch/package/repository"
 )
@@ -12,7 +13,7 @@ type Service interface {
 	GetMyCourses(studentId int) ([]models.Course, error)
 
 	GetMyLessons(studentId int) ([]models.Lesson, error)
-	GetMyLessonById(courseId, studentId int) (models.Lesson, error)
+	GetMyLessonItemsById(courseId, studentId int) ([]dtos.LessonItemResponse, error)
 
 	CreateStudent(student models.User) (int, error)
 }

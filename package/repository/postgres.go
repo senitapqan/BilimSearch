@@ -18,7 +18,7 @@ const (
 	coursesStrudentsTable = "t_courses_students"
 	
 	lessonsTable          = "t_lessons"
-	lessonItemTable       = "t_lesson_item"
+	lessonItemTable       = "t_lesson_items"
 	lessonStudentsTable   = "t_lesson_students"
 	
 	usersTable            = "t_users"

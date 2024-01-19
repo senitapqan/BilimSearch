@@ -42,9 +42,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		myCourses := home.Group("/my-courses") 
 		{
 			myCourses.GET("/", h.myCourse) //done
-			myCourses.GET("/:id", h.myCourseItem) //process
-			myCourses.GET("/:id/grades", h.myCourseGrades)
-			myCourses.GET("/:id/task", h.myCourseTasks)
+			myCourses.GET("/:id", h.myCourseItem) //done
+			myCourses.GET("/:id/grades", h.myCourseGrades) //process
 			myCourses.GET("/:id/task/:task_id", h.myCourseTaskItem)
 			myCourses.POST("/:id/task/:task_id/submit", h.myCourseTaskItemSend)
 		}

@@ -1,6 +1,9 @@
 package service
 
-import "BilimSearch/models"
+import (
+	"BilimSearch/dtos"
+	"BilimSearch/models"
+)
 
 func (s *service) GetMyLessons(studentId int) ([]models.Lesson, error) {
 	lessons, err := s.repos.GetMyLessons(studentId)
@@ -10,10 +13,11 @@ func (s *service) GetMyLessons(studentId int) ([]models.Lesson, error) {
 	return lessons, nil
 }
 
-func (s *service) GetMyLessonById(courseId, studentId int) (models.Lesson, error) {
-	lesson, err := s.repos.GetMyLessonById(courseId, studentId)
+func (s *service) GetMyLessonItemsById(courseId, studentId int) ([]dtos.LessonItemResponse, error) {
+	lessonItems, err := s.repos.GetMyLessonItemsById(courseId, studentId)
 	if err != nil {
-		return lesson, err
+		return nil, err
 	}
-	return lesson, nil
+	return lessonItems, nil
 }
+

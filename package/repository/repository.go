@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"BilimSearch/dtos"
 	"BilimSearch/models"
 
 	"github.com/jmoiron/sqlx"
@@ -15,7 +16,7 @@ type Repository interface {
 	GetMyCourses(id int) ([]models.Course, error)
 
 	GetMyLessons(id int) ([]models.Lesson, error)
-	GetMyLessonById(courseId, studentId int) (models.Lesson, error)
+	GetMyLessonItemsById(courseId, studentId int) ([]dtos.LessonItemResponse, error)
 
 	CreateStudent(student models.User) (int, error)
 }

@@ -1,19 +1,17 @@
 package handler
 
 import (
+	"BilimSearch/dtos"
 	"BilimSearch/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-type signInRequest struct {
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
+
 
 func (h *Handler) signIn(c *gin.Context) {
-	var request signInRequest
+	var request dtos.SignInRequest
 	if err := c.BindJSON(&request); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())		
 		return
