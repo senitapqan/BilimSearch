@@ -12,6 +12,7 @@ type Service interface {
 	GetMyCourses(studentId int) ([]models.Course, error)
 
 	GetMyLessons(studentId int) ([]models.Lesson, error)
+	GetMyLessonById(courseId, studentId int) (models.Lesson, error)
 
 	CreateStudent(student models.User) (int, error)
 }

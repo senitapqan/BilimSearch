@@ -25,3 +25,13 @@ func (r *repository) GetMyLessons(studentId int) ([]models.Lesson, error) {
 	}
 	return lessons, nil
 }
+
+func (r *repository) GetMyLessonById(courseId, studentId int) (models.Lesson, error) {
+	var lesson models.Lesson
+	query := fmt.Sprintf(`select l.id, l.course_id, l.teacher_id, l.period from %s l
+							join %s ls on l.id = ls.lesson_id
+							where ls.student_id = $1 and l.course_id = $2`, lessonsTable, lessonStudentsTable)
+	row := r.db.QueryRow(query, studentId, courseId)
+	err := row.Scan(&lesson.Id, &lesson.CourseId, &lesson.TeacherId, &lesson.Period)
+	return lesson, err
+}

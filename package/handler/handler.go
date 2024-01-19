@@ -10,6 +10,18 @@ type Handler struct {
 	services service.Service
 }
 
+func (h *Handler) getIds(role string, c *gin.Context) (int, int, error) {
+	userId, err := getUserId(c)
+	if err != nil {
+		return -1, -1, err;
+	}
+	roleId, err := getRoleId(c, role)
+	if err != nil {
+		return -1, -1, nil
+	}
+	return userId, roleId, err;
+}
+
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
@@ -23,14 +35,14 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{	
 		home.Use(h.userIdentify())
 		home.GET("/grades", h.homeGrades) 
-		home.GET("/schedule", h.homeSchedule)  //proccess
+		home.GET("/schedule", h.homeSchedule)  //done
 		home.GET("/attendance", h.homeAttendance)
 		home.GET("/attendance/:id", h.attendanceItem)
 	
 		myCourses := home.Group("/my-courses") 
 		{
 			myCourses.GET("/", h.myCourse) //done
-			myCourses.GET("/:id", h.myCourseItem)
+			myCourses.GET("/:id", h.myCourseItem) //process
 			myCourses.GET("/:id/grades", h.myCourseGrades)
 			myCourses.GET("/:id/task", h.myCourseTasks)
 			myCourses.GET("/:id/task/:task_id", h.myCourseTaskItem)

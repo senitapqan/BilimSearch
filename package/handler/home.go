@@ -9,14 +9,7 @@ import (
 
 
 func (h *Handler) homeGrades(c *gin.Context) {
-	userId, err := getUserId(c)
-
-	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
-		return
-	}
-
-	roleId, err := getRoleId(c, strudentCtx)
+	userId, roleId, err := h.getIds(strudentCtx, c)
 
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
@@ -30,14 +23,7 @@ func (h *Handler) homeGrades(c *gin.Context) {
 }
 
 func (h *Handler) homeSchedule(c *gin.Context) {
-	_, err := getUserId(c)
-
-	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
-		return
-	}
-
-	roleId, err := getRoleId(c, strudentCtx)
+	_, roleId, err := h.getIds(strudentCtx, c)
 
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
