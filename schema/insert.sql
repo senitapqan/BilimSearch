@@ -31,4 +31,8 @@ INSERt INTO t_lesson_students(student_id, lesson_id) VALUES (1, 1);
 INSERt INTO t_lesson_students(student_id, lesson_id) VALUES (1, 7);
 INSERt INTO t_lesson_students(student_id, lesson_id) VALUES (1, 6);
 
+INSERT INTO t_courses_grades_students(id, student_id, course_id) VALUES (1, 1, 1);
+INSERT INTO t_courses_grades_students(id, student_id, course_id) VALUES (2, 1, 4);
+INSERT INTO t_courses_grades_students(id, student_id, course_id) VALUES (3, 1, 2);
+
 

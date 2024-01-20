@@ -11,6 +11,7 @@ type Service interface {
 	ParseToken(tokem string) (int, []models.RolesHeaders, error)
 	
 	GetMyCourses(studentId int) ([]models.Course, error)
+	GetMyCoursesGrades(studentId int) ([]dtos.CourseGrades, error)
 
 	GetMyLessons(studentId int) ([]models.Lesson, error)
 	GetMyLessonItemsById(courseId, studentId int) ([]dtos.LessonItemResponse, error)

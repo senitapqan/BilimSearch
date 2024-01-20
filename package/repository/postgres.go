@@ -8,27 +8,22 @@ import (
 )
 
 const (
-	attendanceTable       = "t_attendance"
-	attendanceItemTable   = "t_attendance_item"
-
-	tasksTable            = "t_task"
-	taskItemTable         = "t_task_item"
-	
-	coursesTable          = "t_courses"
-	coursesStrudentsTable = "t_courses_students"
-	
-	lessonsTable          = "t_lessons"
-	lessonItemTable       = "t_lesson_items"
-	lessonStudentsTable   = "t_lesson_students"
-	
-	usersTable            = "t_users"
-	rolesTable            = "t_roles"
-	usersRolesTable       = "t_users_roles"
-	
-	studentsTable         = "t_students"
-	teachersTable         = "t_teachers"
-	
-	postsTable            = "t_posts"
+	attendanceTable            = "t_attendance"
+	attendanceItemTable        = "t_attendance_item"
+	tasksTable                 = "t_task"
+	taskItemTable              = "t_task_item"
+	coursesTable               = "t_courses"
+	coursesStudentsTable       = "t_courses_students"
+	coursesStudentsGradesTable = "t_courses_grades_students"
+	lessonsTable               = "t_lessons"
+	lessonItemTable            = "t_lesson_items"
+	lessonStudentsTable        = "t_lesson_students"
+	usersTable                 = "t_users"
+	rolesTable                 = "t_roles"
+	usersRolesTable            = "t_users_roles"
+	studentsTable              = "t_students"
+	teachersTable              = "t_teachers"
+	postsTable                 = "t_posts"
 )
 
 type Config struct {

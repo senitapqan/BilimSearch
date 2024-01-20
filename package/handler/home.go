@@ -2,24 +2,27 @@ package handler
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 
 func (h *Handler) homeGrades(c *gin.Context) {
-	userId, roleId, err := h.getIds(strudentCtx, c)
+	_, roleId, err := h.getIds(strudentCtx, c)
 
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	c.JSON(200, map[string]string {
-		"userId": strconv.Itoa(userId), 
-		"student": strconv.Itoa(roleId),
-	})
+	grades, err := h.services.GetMyCoursesGrades(roleId)
+
+	if err != nil {
+		newErrorResponse(c, http.StatusBadGateway, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, grades)
 }
 
 func (h *Handler) homeSchedule(c *gin.Context) {

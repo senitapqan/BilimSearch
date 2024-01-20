@@ -14,6 +14,7 @@ type Repository interface {
 	GetId(role string, id int) (int, error)
 
 	GetMyCourses(id int) ([]models.Course, error)
+	GetMyCoursesGrades(id int) ([]dtos.CourseGrades, error)
 
 	GetMyLessons(id int) ([]models.Lesson, error)
 	GetMyLessonItemsById(courseId, studentId int) ([]dtos.LessonItemResponse, error)

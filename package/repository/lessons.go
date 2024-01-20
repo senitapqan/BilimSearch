@@ -34,7 +34,7 @@ func (r *repository) GetMyLessonItemsById(courseId, studentId int) ([]dtos.Lesso
 							where li.lesson_id = $1
 							order by li.id`, lessonItemTable, tasksTable)
 
-	rows, err := r.db.Query(query, courseId)
+	rows, err := r.db.Queryx(query, courseId)
 	
 	if err != nil {
 		return nil, err
