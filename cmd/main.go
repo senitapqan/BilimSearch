@@ -40,10 +40,6 @@ func main() {
 		log.Fatalf("error with data base: %s", err.Error())
 	}
 	
-	if err != nil {
-		log.Fatalf("error with data base: %s", err.Error())
-	}
-
 	repos := repository.NewRepository(db)
 	service := service.NewService(repos)
 	handler := handler.NewHandler(service)
