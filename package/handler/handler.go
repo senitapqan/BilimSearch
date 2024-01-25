@@ -31,6 +31,34 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		auth.POST("/sign-up", h.signUp)	//done
 	}
 
+	CRUD := router.Group("/admin") 
+	{
+		CRUD.Use(h.userIdentify())
+		teacherCRUD := CRUD.Group("/teacher") 
+		{
+			teacherCRUD.POST("/add", h.addTeacher)
+			teacherCRUD.DELETE("/delete/:id", h.deleteTeacher)
+			teacherCRUD.GET("/", h.getTeachers)
+			teacherCRUD.GET("/:id", h.getTeacher)
+		}
+
+		courseCRUD := CRUD.Group("/course") 
+		{
+			courseCRUD.POST("/add")
+			courseCRUD.DELETE("/delete/:id")
+			courseCRUD.GET("/get")
+			courseCRUD.GET("/get/:id")
+		}
+
+		lessonCRUD := CRUD.Group("/lesson")
+		{
+			lessonCRUD.POST("/add")
+			lessonCRUD.DELETE("/delete/:id")
+			lessonCRUD.GET("/get")
+			lessonCRUD.GET("/get/:id")
+		}		
+	}
+
 	home := router.Group("/home") 
 	{	
 		home.Use(h.userIdentify())
