@@ -14,6 +14,7 @@ const (
 	userCtx             = "userId"
 	strudentCtx         = "STUDENT"
 	teacherCtx          = "TEACHER"
+	adminCtx 			= "ADMIN"
 )
 
 func (h *Handler) userIdentify() gin.HandlerFunc {

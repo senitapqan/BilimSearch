@@ -1,6 +1,7 @@
 package service
 
 import (
+	"BilimSearch/dtos"
 	"BilimSearch/models"
 )
 
@@ -11,4 +12,17 @@ func (s *service) CreateStudent(student models.User) (int, error) {
 		return -1, err
 	}
 	return student_id, nil
+}
+
+func (s service) DeleteStudent(lessonId int) error {
+	return nil
+}
+
+func (s service) GetStudent(lessonId int) (dtos.User, error) {
+	var student dtos.User
+	return student, nil
+}
+
+func (s service) GetStudents() ([]dtos.User,  error) {
+	return nil, nil
 }

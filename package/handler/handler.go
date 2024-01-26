@@ -44,19 +44,27 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 		courseCRUD := CRUD.Group("/course") 
 		{
-			courseCRUD.POST("/add")
-			courseCRUD.DELETE("/delete/:id")
-			courseCRUD.GET("/get")
-			courseCRUD.GET("/get/:id")
+			courseCRUD.POST("/add", h.addCourse)
+			courseCRUD.DELETE("/delete/:id", h.deleteCourse)
+			courseCRUD.GET("/get", h.getCourses)
+			courseCRUD.GET("/get/:id", h.getCourses)
 		}
 
 		lessonCRUD := CRUD.Group("/lesson")
 		{
-			lessonCRUD.POST("/add")
-			lessonCRUD.DELETE("/delete/:id")
-			lessonCRUD.GET("/get")
-			lessonCRUD.GET("/get/:id")
-		}		
+			lessonCRUD.POST("/add", h.addLesson)
+			lessonCRUD.DELETE("/delete/:id", h.deleteLesson)
+			lessonCRUD.GET("/get", h.getLessons)
+			lessonCRUD.GET("/get/:id", h.getLesson)
+		}	
+		
+		lessonItemCRUD := CRUD.Group("/lessonItem")
+		{
+			lessonItemCRUD.POST("/add", h.addLessonItem)
+			lessonItemCRUD.DELETE("/delete/:id", h.deleteLessonItem)
+			lessonItemCRUD.GET("/get", h.getLessonItems)
+			lessonItemCRUD.GET("/get/:id", h.getLessonItem)
+		}
 	}
 
 	home := router.Group("/home") 

@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"BilimSearch/dtos"
 	"BilimSearch/models"
 	"fmt"
 )
@@ -28,3 +29,17 @@ func (r *repository) CreateStudent(student models.User) (int, error) {
 
 	return id, tx.Commit()
 }
+
+func (r repository) DeleteStudent(lessonId int) error {
+	return nil
+}
+
+func (r repository) GetStudent(lessonId int) (dtos.User, error) {
+	var student dtos.User
+	return student, nil
+}
+
+func (r repository) GetStudents() ([]dtos.User,  error) {
+	return nil, nil
+}
+
