@@ -5,8 +5,10 @@ import (
 	"BilimSearch/models"
 )
 
-func (s service) CreateTeacher(teacher models.Teacher) (int, error) {
-	return 0, nil
+func (s service) CreateTeacher(teacher models.User) (int, error) {
+	teacher.Password = s.hashPassword(teacher.Password) 
+	teacherId, err := s.repos.CreateTeacher(teacher)
+	return teacherId, err
 }
 
 func (s service) DeleteTeacher(teacherId int) error {

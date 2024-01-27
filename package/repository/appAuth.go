@@ -2,9 +2,10 @@ package repository
 
 import (
 	"BilimSearch/models"
-	"database/sql"
 	"fmt"
 	"strings"
+
+	"github.com/jmoiron/sqlx"
 )
 
 func (r *repository) GetRoles(id int) ([]string, error) {
@@ -41,7 +42,7 @@ func (r *repository) GetUser(username string) (models.User, error) {
 	return user, err
 }
 
-func (r *repository) CreateUser(user models.User, tx *sql.Tx) (int, error) {
+func (r *repository) CreateUser(user models.User, tx *sqlx.Tx) (int, error) {
 	var user_id int
 	query := fmt.Sprintf(fmt.Sprintf("insert into %s (username, password, name, surname, email) values ($1, $2, $3, $4, $5) returning id", usersTable))
 	row := tx.QueryRow(query, user.Username, user.Password, user.Name, user.Surname, user.Email)

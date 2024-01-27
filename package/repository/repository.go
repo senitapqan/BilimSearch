@@ -24,7 +24,7 @@ type Repository interface {
 	GetStudent(studentId int) (dtos.User, error)
 	GetStudents() ([]dtos.User, error)
 
-	CreateTeacher(teacher models.Teacher) (int, error)
+	CreateTeacher(teacher models.User) (int, error)
 	DeleteTeacher(teacherId int) error
 	GetTeacher(teacherId int) (dtos.User, error)
 	GetTeachers() ([]dtos.User, error)

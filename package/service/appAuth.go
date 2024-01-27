@@ -5,7 +5,6 @@ import (
 	"crypto/sha1"
 	"errors"
 	"fmt"
-	"net/http"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -39,7 +38,7 @@ func (s *service) GenerateToken(username, password string) (string, error) {
 	}
 
 	if user.Password != password {
-		return "", http.ErrAbortHandler
+		return "", errors.New("incorrect password")
 	}
 
 	var rolesHeaders []models.RolesHeaders
