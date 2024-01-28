@@ -1,1 +1,1 @@
-SELECT * FROM t_courses_grades_students
+select * FROM t_lessons

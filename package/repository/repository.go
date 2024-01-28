@@ -10,8 +10,8 @@ import (
 type Repository interface {
 	GetUser(username string) (models.User, error)
 	GetRoles(id int) ([]string, error)
+	GetRoleId(role string, userId int) (int, error)
 
-	GetId(role string, id int) (int, error)
 
 	GetMyCourses(id int) ([]models.Course, error)
 	GetMyCoursesGrades(id int) ([]dtos.CourseGrades, error)

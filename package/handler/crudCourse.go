@@ -11,7 +11,7 @@ func (h *Handler) addCourse(c *gin.Context) {
 	_, _, err := h.getIds(adminCtx, c)	
 
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusMethodNotAllowed, err.Error())
 		return
 	}
 
@@ -37,7 +37,7 @@ func (h *Handler) deleteCourse(c *gin.Context) {
 	_, _, err := h.getIds(adminCtx, c)	
 
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusMethodNotAllowed, err.Error())
 		return
 	}	
 }
@@ -46,7 +46,7 @@ func (h *Handler) getCourses(c *gin.Context) {
 	_, _, err := h.getIds(adminCtx, c)	
 
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusMethodNotAllowed, err.Error())
 		return
 	}
 }
@@ -55,7 +55,7 @@ func (h *Handler) getCourse(c *gin.Context) {
 	_, _, err := h.getIds(adminCtx, c)	
 
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusMethodNotAllowed, err.Error())
 		return
-	}	
+	}
 }

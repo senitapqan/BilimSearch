@@ -52,7 +52,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 		lessonCRUD := CRUD.Group("/lesson")
 		{
-			lessonCRUD.POST("/add", h.addLesson)
+			lessonCRUD.POST("/add", h.addLesson) //done
 			lessonCRUD.DELETE("/delete/:id", h.deleteLesson)
 			lessonCRUD.GET("/get", h.getLessons)
 			lessonCRUD.GET("/get/:id", h.getLesson)

@@ -49,7 +49,7 @@ func (s *service) GenerateToken(username, password string) (string, error) {
 	}
 
 	for _, role := range roles {
-		id, err := s.repos.GetId(role, user.Id)
+		id, err := s.repos.GetRoleId(role, user.Id)
 		if err != nil {
 			return "", err
 		}

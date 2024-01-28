@@ -26,12 +26,12 @@ func (r *repository) GetRoles(id int) ([]string, error) {
 	return roles, err
 }
 
-func (r *repository) GetId(role string, user_id int) (int, error) {
+func (r *repository) GetRoleId(role string, userId int) (int, error) {
 	var id int
 	table := "t_" + strings.ToLower(role) + "s"
 
 	query := fmt.Sprintf("select id from %s where user_id = $1", table)
-	err := r.db.Get(&id, query, user_id)
+	err := r.db.Get(&id, query, userId)
 	return id, err
 }  
 
@@ -42,13 +42,15 @@ func (r *repository) GetUser(username string) (models.User, error) {
 	return user, err
 }
 
-func (r *repository) CreateUser(user models.User, tx *sqlx.Tx) (int, error) {
+func (r repository) GetIdByRole(tx *sqlx.Tx, roleId int, roleTable string) (int, error) {
 	var userId int
-	query := fmt.Sprintf(fmt.Sprintf("insert into %s (username, password, name, surname, email) values ($1, $2, $3, $4, $5) returning id", usersTable))
-	row := tx.QueryRow(query, user.Username, user.Password, user.Name, user.Surname, user.Email)
+	query := fmt.Sprintf("select user_id from %s where id = $1", roleTable)
+	row := r.db.QueryRowx(query, roleId)
+
 	if err := row.Scan(&userId); err != nil {
 		tx.Rollback()
 		return 0, err
 	}
+
 	return userId, nil
 }

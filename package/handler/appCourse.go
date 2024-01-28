@@ -26,7 +26,7 @@ func (h *Handler) myCourse(c *gin.Context) {
 	_, roleId, err := h.getIds(strudentCtx, c)
 
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusMethodNotAllowed, err.Error())
 		return
 	}
 
@@ -44,9 +44,9 @@ func (h *Handler) myCourseItem(c *gin.Context) {
 	_, roleId, err := h.getIds(strudentCtx, c)
 
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusMethodNotAllowed, err.Error())
 		return
-	}	
+	}
 	
 	courseId, err := h.getCourseId(c)
 	

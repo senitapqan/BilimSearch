@@ -11,7 +11,7 @@ func (h *Handler) homeGrades(c *gin.Context) {
 	_, roleId, err := h.getIds(strudentCtx, c)
 
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusMethodNotAllowed, err.Error())
 		return
 	}
 
@@ -29,7 +29,7 @@ func (h *Handler) homeSchedule(c *gin.Context) {
 	_, roleId, err := h.getIds(strudentCtx, c)
 
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusMethodNotAllowed, err.Error())
 		return
 	}
 
