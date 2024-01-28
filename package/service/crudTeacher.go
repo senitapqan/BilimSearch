@@ -3,10 +3,12 @@ package service
 import (
 	"BilimSearch/dtos"
 	"BilimSearch/models"
+	
 )
 
 func (s service) CreateTeacher(teacher models.User) (int, error) {
 	teacher.Password = s.hashPassword(teacher.Password) 
+	
 	teacherId, err := s.repos.CreateTeacher(teacher)
 	return teacherId, err
 }

@@ -43,12 +43,12 @@ func (r *repository) GetUser(username string) (models.User, error) {
 }
 
 func (r *repository) CreateUser(user models.User, tx *sqlx.Tx) (int, error) {
-	var user_id int
+	var userId int
 	query := fmt.Sprintf(fmt.Sprintf("insert into %s (username, password, name, surname, email) values ($1, $2, $3, $4, $5) returning id", usersTable))
 	row := tx.QueryRow(query, user.Username, user.Password, user.Name, user.Surname, user.Email)
-	if err := row.Scan(&user_id); err != nil {
+	if err := row.Scan(&userId); err != nil {
 		tx.Rollback()
 		return 0, err
 	}
-	return user_id, nil
+	return userId, nil
 }

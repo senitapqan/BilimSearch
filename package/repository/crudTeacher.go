@@ -14,6 +14,7 @@ func (r repository) CreateTeacher(teacher models.User) (int, error) {
 	}
 
 	userId, err := r.CreateUser(teacher, tx)
+
 	if err != nil {
 		return 0, err
 	}
@@ -28,7 +29,11 @@ func (r repository) CreateTeacher(teacher models.User) (int, error) {
 	}
 
 	query = fmt.Sprintf(`insert into %s (role_id, user_id) values ($1, $2)`, usersRolesTable)
-	row = tx.QueryRowx(query, userId, teacherRoleId)
+	_, err = tx.Exec(query, teacherRoleId, userId)
+
+	if err != nil {
+		return 0, err
+	}
 
 	return teacherId, tx.Commit()
 }

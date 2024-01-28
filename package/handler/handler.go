@@ -36,7 +36,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		CRUD.Use(h.userIdentify())
 		teacherCRUD := CRUD.Group("/teacher") 
 		{
-			teacherCRUD.POST("/add", h.addTeacher)
+			teacherCRUD.POST("/add", h.addTeacher) //done
 			teacherCRUD.DELETE("/delete/:id", h.deleteTeacher)
 			teacherCRUD.GET("/", h.getTeachers)
 			teacherCRUD.GET("/:id", h.getTeacher)
@@ -44,7 +44,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 		courseCRUD := CRUD.Group("/course") 
 		{
-			courseCRUD.POST("/add", h.addCourse)
+			courseCRUD.POST("/add", h.addCourse) //done
 			courseCRUD.DELETE("/delete/:id", h.deleteCourse)
 			courseCRUD.GET("/get", h.getCourses)
 			courseCRUD.GET("/get/:id", h.getCourses)

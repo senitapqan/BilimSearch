@@ -1,9 +1,20 @@
 package repository
 
-import "BilimSearch/models"
+import (
+	"BilimSearch/models"
+	"fmt"
+	"log"
+)
 
 func (r repository) CreateCourse(course models.Course) (int, error) {
-	return 0, nil
+	var courseId int
+	query := fmt.Sprintf("insert into %s (name) values($1) returning id", coursesTable)
+	row := r.db.QueryRowx(query, course.Name)
+	if err := row.Scan(&courseId); err != nil {
+		log.Printf("Error was after query: " + err.Error())
+		return 0, err
+	}
+	return courseId, nil
 }
 func (r repository) DeleteCourse(courseId int) error {
 	return nil
