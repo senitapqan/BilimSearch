@@ -37,7 +37,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		teacherCRUD := CRUD.Group("/teacher") 
 		{
 			teacherCRUD.POST("/add", h.addTeacher) //done
-			teacherCRUD.DELETE("/delete/:id", h.deleteTeacher)
+			teacherCRUD.DELETE("/delete/:id", h.deleteTeacher) //done
 			teacherCRUD.GET("/", h.getTeachers)
 			teacherCRUD.GET("/:id", h.getTeacher)
 		}

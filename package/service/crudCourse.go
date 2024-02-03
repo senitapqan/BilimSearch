@@ -8,7 +8,7 @@ func (s service) CreateCourse(course models.Course) (int, error){
 }
 
 func (s service) DeleteCourse(courseId int) error {
-	return nil
+	return s.repos.DeleteCourse(courseId) 
 }
 
 func (s service) GetCourse(courseId int) (models.Course, error) {

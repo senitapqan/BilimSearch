@@ -14,8 +14,7 @@ func (s service) CreateTeacher(teacher models.User) (int, error) {
 }
 
 func (s service) DeleteTeacher(teacherId int) error {
-	err := s.repos.DeleteTeacher(teacherId)
-	return err
+	return s.repos.DeleteTeacher(teacherId)
 }
 
 func (s service) GetTeacher(teacherId int) (dtos.User, error) {

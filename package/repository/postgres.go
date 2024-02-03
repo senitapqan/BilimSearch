@@ -25,8 +25,8 @@ const (
 	teachersTable              = "t_teachers"
 	postsTable                 = "t_posts"
 
-	teacherRoleId              = 2
-	studentRoleId              = 1
+	teacherRoleId = 2
+	studentRoleId = 1
 )
 
 type Config struct {

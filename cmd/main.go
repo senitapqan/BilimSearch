@@ -14,6 +14,7 @@ type accounts struct {
 	Id       int `db:"user_id"`
 	Username string `db:"username"`
 }
+
 type Testing struct {
 	db *sqlx.DB
 }

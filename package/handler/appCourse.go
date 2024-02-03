@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (h *Handler) getCourseId(c *gin.Context) (int, error){
+func (h Handler) getCourseId(c *gin.Context) (int, error){
 	courseIdString := c.Param("id")
 	if len(courseIdString) == 0 {
 		return -1, errors.New("Can't find courseId in URL")
@@ -48,7 +48,7 @@ func (h *Handler) myCourseItem(c *gin.Context) {
 		return
 	}
 	
-	courseId, err := h.getCourseId(c)
+	courseId, err := h.	getCourseId(c)
 	
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())

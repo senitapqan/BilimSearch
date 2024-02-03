@@ -12,7 +12,6 @@ type Repository interface {
 	GetRoles(id int) ([]string, error)
 	GetRoleId(role string, userId int) (int, error)
 
-
 	GetMyCourses(id int) ([]models.Course, error)
 	GetMyCoursesGrades(id int) ([]dtos.CourseGrades, error)
 
@@ -43,11 +42,17 @@ type Repository interface {
 	DeleteLessonItem(lessonItemId int) error
 	GetLessonItem(lessonItemId int) (models.LessonItem, error)
 	GetLessonItems() ([]models.LessonItem, error)
+
+}
+
+type course interface {
+	
 }
 
 type repository struct {
 	db *sqlx.DB
 }
+
 
 func NewRepository(db *sqlx.DB) Repository {
 	return &repository{
