@@ -30,71 +30,83 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		auth.POST("/sign-in", h.signIn) //done
 		auth.POST("/sign-up", h.signUp)	//done
 	}
-
-	CRUD := router.Group("/admin") 
+	APP := router.Group("/app")
 	{
-		CRUD.Use(h.userIdentify())
-		teacherCRUD := CRUD.Group("/teacher") 
+		APP.Use(h.userIdentify())	
+		CRUD := APP.Group("/admin") 
 		{
-			teacherCRUD.POST("/add", h.addTeacher) //done
-			teacherCRUD.DELETE("/delete/:id", h.deleteTeacher) //done
-			teacherCRUD.GET("/", h.getTeachers)
-			teacherCRUD.GET("/:id", h.getTeacher)
-		}
+			CRUD.Use(h.userIdentify())
+			teacherCRUD := CRUD.Group("/teacher") 
+			{
+				teacherCRUD.POST("/add", h.addTeacher) //done
+				teacherCRUD.DELETE("/delete/:id", h.deleteTeacher) //done
+				teacherCRUD.GET("/", h.getTeachers)
+				teacherCRUD.GET("/:id", h.getTeacher)
+			}
 
-		courseCRUD := CRUD.Group("/course") 
-		{
-			courseCRUD.POST("/add", h.addCourse) //done
-			courseCRUD.DELETE("/delete/:id", h.deleteCourse)
-			courseCRUD.GET("/get", h.getCourses)
-			courseCRUD.GET("/get/:id", h.getCourses)
-		}
+			courseCRUD := CRUD.Group("/course") 
+			{
+				courseCRUD.POST("/add", h.addCourse) //done
+				courseCRUD.DELETE("/delete/:id", h.deleteCourse)
+				courseCRUD.GET("/get", h.getCourses)
+				courseCRUD.GET("/get/:id", h.getCourses)
+			}
 
-		lessonCRUD := CRUD.Group("/lesson")
-		{
-			lessonCRUD.POST("/add", h.addLesson) //done
-			lessonCRUD.DELETE("/delete/:id", h.deleteLesson)
-			lessonCRUD.GET("/get", h.getLessons)
-			lessonCRUD.GET("/get/:id", h.getLesson)
-		}	
+			lessonCRUD := CRUD.Group("/lesson")
+			{
+				lessonCRUD.POST("/add", h.addLesson) //done
+				lessonCRUD.DELETE("/delete/:id", h.deleteLesson)
+				lessonCRUD.GET("/get", h.getLessons)
+				lessonCRUD.GET("/get/:id", h.getLesson)
+			}	
 		
-		lessonItemCRUD := CRUD.Group("/lessonItem")
+			lessonItemCRUD := CRUD.Group("/lessonItem")
+			{
+				lessonItemCRUD.POST("/add", h.addLessonItem) 
+				lessonItemCRUD.DELETE("/delete/:id", h.deleteLessonItem)
+				lessonItemCRUD.GET("/get", h.getLessonItems)
+				lessonItemCRUD.GET("/get/:id", h.getLessonItem)
+			}
+		}
+
+		teacher := APP.Group("/teacher") 
 		{
-			lessonItemCRUD.POST("/add", h.addLessonItem)
-			lessonItemCRUD.DELETE("/delete/:id", h.deleteLessonItem)
-			lessonItemCRUD.GET("/get", h.getLessonItems)
-			lessonItemCRUD.GET("/get/:id", h.getLessonItem)
+			lessonTeacher := teacher.Group("/lesson") 
+			{
+				lessonTeacher.GET("/", h.getTeacherLessons)
+				lessonTeacher.GET("/:id", h.getTeacherLesson)
+				lessonTeacher.GET("/:id/")
+			}
+			
+		}
+
+		home := APP.Group("/home") 
+		{	
+			home.GET("/grades", h.homeGrades) 
+			home.GET("/schedule", h.homeSchedule)  //done
+			home.GET("/attendance", h.homeAttendance)
+			home.GET("/attendance/:id", h.attendanceItem)
+	
+			myCourses := home.Group("/my-courses") 
+			{
+				myCourses.GET("/", h.myCourse) //done
+				myCourses.GET("/:id", h.myCourseItem) //done
+				myCourses.GET("/:id/grades", h.myCourseGrades) //process
+				myCourses.GET("/:id/task/:task_id", h.myCourseTask)
+				myCourses.POST("/:id/task/:task_id/submit", h.myCourseTaskSend)
+			}
+
+			register := home.Group("/course-reg") 
+			{	
+				register.GET("/", h.regCourse)
+				register.DELETE("/:id", h.delCourseItem)
+
+				register.GET("/all", h.regCourseAllItems)
+				register.GET("/:id", h.regCourseItem)
+				register.POST("/:id", h.regCoursePickLesson)
+			}
 		}
 	}
-
-	home := router.Group("/home") 
-	{	
-		home.Use(h.userIdentify())
-		home.GET("/grades", h.homeGrades) 
-		home.GET("/schedule", h.homeSchedule)  //done
-		home.GET("/attendance", h.homeAttendance)
-		home.GET("/attendance/:id", h.attendanceItem)
-	
-		myCourses := home.Group("/my-courses") 
-		{
-			myCourses.GET("/", h.myCourse) //done
-			myCourses.GET("/:id", h.myCourseItem) //done
-			myCourses.GET("/:id/grades", h.myCourseGrades) //process
-			myCourses.GET("/:id/task/:task_id", h.myCourseTaskItem)
-			myCourses.POST("/:id/task/:task_id/submit", h.myCourseTaskItemSend)
-		}
-
-		register := home.Group("/course-reg") 
-		{
-			register.GET("/", h.regCourse)
-			register.DELETE("/:id", h.delCourseItem)
-
-			register.GET("/all", h.regCourseAllItems)
-			register.GET("/:id", h.regCourseItem)
-			register.POST("/:id", h.regCoursePickLesson)
-		}
-	}
-	
 
 	return router
 } 

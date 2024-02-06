@@ -3,7 +3,8 @@ package service
 import "BilimSearch/models"
 
 func (s service) CreateLessonItem(lessonItem models.LessonItem) (int, error) {
-	return 0, nil
+	lessonItemId, err := s.repos.CreateLessonItem(lessonItem)
+	return lessonItemId, err
 }
 
 func (s service) DeleteLessonItem(lessonItemId int) error {

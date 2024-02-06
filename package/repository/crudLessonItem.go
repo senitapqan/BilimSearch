@@ -1,9 +1,18 @@
 package repository
 
-import "BilimSearch/models"
+import (
+	"BilimSearch/models"
+	"fmt"
+)
 
 func (r repository) CreateLessonItem(lessonItem models.LessonItem) (int, error) {
-	return 0, nil
+	var lessonItemId int
+	request := fmt.Sprintf("insert into %s (lesson_id, date, topic) values ($1, $2, $3) returning id", lessonItemTable)
+	row := r.db.QueryRowx(request, lessonItem.LessonId, lessonItem.Date, lessonItem.Topic)
+	if err := row.Scan(&lessonItemId); err != nil {
+		return -1, err
+	}	
+	return lessonItemId, nil
 }
 
 func (r repository) DeleteLessonItem(lessonItemId int) error {

@@ -16,6 +16,7 @@ type LessonItem struct {
 	Id       int    `json:"lessonItem_id"`
 	LessonId int    `json:"lesson_id"`
 	Date     string `json:"date"`
+	Topic 	 string `json:"topic"`
 }
 
 type CoursesStudents struct {

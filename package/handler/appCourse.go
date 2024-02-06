@@ -69,14 +69,10 @@ func (h *Handler) myCourseGrades(c *gin.Context) {
 	
 }
 
-func (h *Handler) myCourseTasks(c *gin.Context) {
+func (h *Handler) myCourseTask(c *gin.Context) {
 	
 }
 
-func (h *Handler) myCourseTaskItem(c *gin.Context) {
-	
-}
-
-func (h *Handler) myCourseTaskItemSend(c *gin.Context) {
+func (h *Handler) myCourseTaskSend(c *gin.Context) {
 	
 }
